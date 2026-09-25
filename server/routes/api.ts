@@ -297,10 +297,8 @@ apiRouter.get('/admin/metrics', (_req: Request, res: Response) => {
       'HALLMARKING_QUERY': (intentStats['HALLMARKING_QUERY'] || 0) + 5
     },
     ragPerformance: {
-      meanReciprocalRank: 0.94,
-      retrievalRecallAt3: '96.2%',
-      groundednessScore: '98.5%',
-      citationAccuracy: '100%'
+      status: 'prototype',
+      note: 'Evaluation metrics are not computed from a production benchmark dataset yet.'
     }
   });
 });

@@ -96,6 +96,21 @@ Source-Backed Transparent Answer + Interactive Cards
 
 ---
 
+## ☁️ Vercel Deployment
+
+This project is Vercel-compatible. The React/Vite frontend is built to `dist/`, while the Express API is exposed through the Vercel serverless catch-all function at `api/[...path].ts`.
+
+### Vercel setup
+1. Import the repository into Vercel.
+2. Keep the framework as **Vite** (or let Vercel detect it).
+3. Set the environment variable `GEMINI_API_KEY` in Vercel Project Settings → Environment Variables.
+4. Optionally set `GEMINI_MODEL` (default: `gemini-2.5-flash`).
+5. Deploy.
+
+The frontend continues to call relative endpoints such as `/api/chat`, so no frontend API URL is required.
+
+**Important:** never expose the Gemini key as a `VITE_*` variable. It must remain server-side.
+
 ## 🚀 Getting Started
 
 ### Prerequisites
@@ -162,3 +177,18 @@ npm start
 ## ⚖️ Regulatory Disclaimer
 
 *Information provided by BIS Intelligence Assistant is intended to help users discover and understand BIS information. It does not replace official BIS notifications, standards, regulations, certification decisions, or professional/legal advice. Users should verify requirements against the latest applicable official BIS sources.*
+
+### Local production-style API testing
+
+For the closest match to Vercel's runtime, install the Vercel CLI and use `vercel dev` after linking the project. The normal `npm run dev` command remains available for the original AI Studio-style local Express + Vite development workflow.
+
+### Vercel environment variables
+
+Set these in **Vercel → Project → Settings → Environment Variables**:
+
+```env
+GEMINI_API_KEY=your_real_gemini_api_key
+GEMINI_MODEL=gemini-2.5-flash
+```
+
+Do not use `VITE_GEMINI_API_KEY`; browser-exposed Vite variables are not appropriate for a server-side secret.
